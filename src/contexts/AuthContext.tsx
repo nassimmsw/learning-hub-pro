@@ -41,7 +41,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       email, 
       password,
       options: {
-        emailRedirectTo: undefined,
+        data: {
+          email_confirm: false,
+        },
       }
     });
     return { error: error as Error | null };
