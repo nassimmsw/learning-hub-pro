@@ -27,15 +27,18 @@ export default function Login() {
     }
   };
 
+  const [success, setSuccess] = useState('');
+
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError('');
+    setSuccess('');
     const { error } = await signUp(email, password);
     if (error) {
       setError(error.message);
     } else {
-      setError('Check your email to confirm your account!');
+      setSuccess('Account created! You can now sign in.');
     }
     setLoading(false);
   };
@@ -101,6 +104,7 @@ export default function Login() {
                   />
                 </div>
                 {error && <p className="text-sm text-red-500">{error}</p>}
+                {success && <p className="text-sm text-green-500">{success}</p>}
                 <Button type="submit" className="w-full" disabled={loading}>
                   {loading ? 'Creating account...' : 'Sign Up'}
                 </Button>
